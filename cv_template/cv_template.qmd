@@ -1,0 +1,163 @@
+---
+author: Sofía Zorrilla Azcué 
+#title: R Developer
+format:
+  classic-cv-pdf: default
+cvfooter:
+  # left: "mr.schochastics.net"
+  # right: "github.com/schochastics"
+cvcolor: 58748F #without `#`
+cvfont: raleway #texlive fonts like raleway,fetamont,gillius,comfortaa
+cvmeta:
+  - title: Estatus
+    left: Asistente de investigación, ENES Unidad Morelia
+    # right: Cologne, Germany
+  - title: Lineas de investigación
+    left: Genómica de poblaciones, filogeografía
+    # right: mr.schochastics.net
+  - title: Habilidades técnicas
+    left: R, bash, Python, SQL
+    # right: david@schochastics.net
+execute:
+  echo: false
+---
+\definecolor{ColorTwo}{RGB}{120,0,120} 
+\newcommand{\myhref}[2]{\href{#1}{\textcolor{ColorTwo}{#2}}}
+
+```{r}
+#| label: cvevents
+cvevents <- function(tbl, when, what, where, details) {
+
+    command_start <- "\\cvevent"
+
+    res <- paste0(
+        command_start, "{", tbl[[when]], "}", 
+        "{", tbl[[what]], "}",
+        "{", tbl[[where]], "}")
+    
+    tbl[[details]] <- sapply(tbl[[details]], function(x) paste0("{", x, "}", collapse = ","))
+    res <- paste0(res, "{",tbl[[details]],"}")
+
+    cat(res, sep = "\n")
+}
+```
+
+<!-- # Resumen -->
+
+<!-- Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. -->
+
+\
+
+# Experiencia
+
+
+```{r}
+#| label: experiencia
+#| output: asis
+tibble::tribble(
+    ~role, ~institution, ~dates, ~details, ~tasks,
+    "Asistente de investigación", "Laboratorio de Biología Neotropical, ENES Morelia", "Ene. 2023 - Presente",
+    "Investigación", c("Análisis de datos genéticos para proyectos de investigación de filogeografía de encinos", "Manejo y recopilación de información de base de datos de ejemplares de herbario", "Planeación logística de salidas de campo"),
+    
+        "Asistente de investigación", "Monitoreo de flora y fauna de Guanajuato - ENES Morelia", "Nov. 2023 - Presente",
+    "Investigación", c("Recopilación bibliográfica de registros de encinos en Guanajuato y almacenamiento en base de datos", "Validación de registros de encinos de la plataforma de ciencia ciudadana Naturalista", "Planeación logística y ejecución de salidas de campo a sitios con vacios de información"),
+    
+    "Ayudante de profesor", "Licenciatura en Ciencias Ambientales - ENES Unidad Morelia", "Ago. 2023 - Dic. 2023",
+    "Clases", c("Materia: Fundamentos de ecología"),
+    
+    
+   "Asistente de investigación", "Laboratorio de Biología Neotropical, ENES Morelia", "Ene. 2023 - Presente",
+    "Investigación", c('Colaboración en el proyecto titulado "Conservation of Endangered Quercus insignis M. Martens and Galeotti, 1843 (Fagaceae) under Climate Change"' ),
+    
+    "Ayudante de profesor", "Licenciatura en Ciencias Ambientales - ENES Unidad Morelia", "Oct. 2022 - Dic. 2022",
+    "Clases", c("Materia: Fundamentos de ecología"),
+    
+    "Profesora de inglés", "Instituto Superior Intercultural Ayuuk", "Ene. 2015 - May. 2015",
+    "Clases", c("Inglés para estudiantes de licenciatura"),
+) |>
+    cvevents(when = "dates", what = "role", where = "institution", details = "tasks")
+```
+
+\
+
+# Educación
+
+```{r }
+#| label: educacion
+#| output: asis
+tibble::tribble(
+    ~degree, ~uni, ~loc, ~dates, ~details,
+    "Maestría en Ciencias Biológicas", "", "Escuela Nacional de Estudios Superiores, Morelia", "2021 - Presente", c("Tesis: Efecto de la heterogeneidad ambiental sobre las frecuencias alélicas de regiones codificantes de Quercus insignis Martens \\& Galeotti 1843", "Estimación del riesgo de potencial maladaptación de las poblaciones de Q. insignis ante elcambio climático"),
+    
+    "Licenciatura en Ecología", "", "Escuela Nacional de Estudios Superiores, Morelia", "Ago. 2016 - May. 2021", c("Medalla Gabino Barreda al mejor promedio de la licenciatura")
+) |>
+    cvevents(when = "dates", what = "degree", where = "loc", details = "details")
+```
+
+
+\
+
+# Estancias académicas y congresos
+
+```{r}
+#| label: estancias
+#| output: asis
+tibble::tribble(
+     ~institution, ~role, ~dates, ~details, ~tasks,
+     "The Morton Arboretum, Chicago", "Plant Systematics Laboratory and Herbarium","Sep. 2022 - Dic. 2022",
+    "Investigación", c("Análisis de datos genómicos para investigación de filogeografía de Q. insignis", "Análisis de datos genómicos para tesis de maestría"),
+    
+    "UMCES, Appalachian Laboratory", "Paul Gugger's laboratory", "Jun. 2019 - Jul. 2019",
+    "Investigación", c("Análisis de datos genómicos para investigación en 'Genomic evidence of rapid evolution of a Quercus alba L.(white
+oak) population to climate change'")
+    ) |>
+    cvevents(when = "dates", what = "role", where = "institution", details = "tasks")
+
+```
+
+\
+
+# Congresos
+
+```{r}
+#| label: congresos
+#| output: asis
+tibble::tribble(
+     ~institution, ~dates, ~details, ~tasks,
+     
+    "Congreso Sociedad Científica Mexicana de Ecología (SCME) VII", "Querétaro - 2017", "2017", c("Ponencia: Filogeografía y demografía histórica de una especie
+endémica de roble (Quercus: Fagaceae) en el norte de los Andes.")
+    ) |>
+    cvevents(when = "dates", what = "role", where = "institution", details = "tasks")
+
+```
+
+\
+
+# Becas y financiamientos
+
+```{r}
+#| label: becas
+#| output: asis
+tibble::tribble(
+     ~institution, ~dates, ~details, ~tasks,
+     
+    "Explorers Club Youth Activity Fund Grant", "2018", "", c("Proyecto: Conservationgenetics of the oak tree Quercus insignis")
+    ) |>
+    cvevents(when = "dates", what = "role", where = "institution", details = "tasks")
+
+```
+
+# Publicaciones 
+\begin{description}
+	\raggedright
+	\item \underline{Zorrilla-Azcué, S.}, González-Rodríguez, A, Oyama, K, González, MA, Rodríguez-Correa, H. \textbf{(2021)} The DNA history of a lonely oak: Quercus humboldtii phylogeography in the Colombian Andes {\it Ecol. Evol.}. doi:~\myhref{https://doi.org/10.1002/ece3.7529}{10.1002/ece3.7529}
+
+  \item \underline{Zorrilla-Azcué, S.}, González-Rodríguez, A, Oyama, K, González, MA, Rodríguez-Correa, H. \textbf{(2022)} Response to: A paleoecological context to assess the development of oak forest in Colombia: A comment on Zorrilla-Azcué, S., González-Rodríguez, A., Oyama, K., González, M.A. \& Rodríguez-Correa, H., The DNA history of a lonely oak: Quercus humboldtii phylogeography in the Colombian Andes. {\it Ecol. Evol.}. doi:~\myhref{https://doi.org/10.1002/ece3.9271}{10.1002/ece3.9271}
+
+  \item Sourabh Palande, et. al., \textbf{(2023)} A data-driven evaluation of Arabidopsis-centric research and the model species concept. {\it bioxiv}. doi:~\myhref{https://doi.org/10.1101/2023.08.20.554029}{10.1101/2023.08.20.554029}
+ 
+
+\end{description}
+
+
